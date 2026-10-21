@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ranjitha K's student portfolio">
+    <title>Ranjitha K | Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <header class="header">
+        <a href="#home" class="logo"><span>RK</span> Ranjitha K</a>
+
+        <button type="button" class="menu-toggle" id="menu-toggle" aria-label="Open navigation"
+            aria-expanded="false">☰</button>
+
+        <nav class="nav" id="nav">
+            <a class="nav-link active" href="#home">Home</a>
+            <a class="nav-link" href="#about">About</a>
+            <a class="nav-link" href="#projects">Projects</a>
+            <a class="nav-link" href="#skills">Skills</a>
+            <a class="nav-link" href="#contact">Contact</a>
+            <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Switch to dark theme">☾</button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="hero section" id="home">
+            <div class="hero-content">
+                <p class="eyebrow">COMPUTER SCIENCE STUDENT</p>
+                <h1>Hi, I'm Ranjitha.<br>
+                    I build and explore <span>digital experiences.</span>
+                </h1>
+                <p class="intro">
+                    I'm passionate about programming, web development, and
+                    creating simple, useful solutions through technology.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn primary">View my work →</a>
+                    <a href="#contact" class="btn secondary">Let's connect</a>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://github.com/ranjithakannan1210" target="_blank" rel="noopener noreferrer">GitHub
+                        ↗</a>
+                    <a href="https://www.linkedin.com/in/ranjitha-kannan-6a320038b/" target="_blank"
+                        rel="noopener noreferrer">LinkedIn ↗</a>
+                </div>
+            </div>
+
+            <!-- Decorative illustration -->
+            <div class="hero-art" aria-hidden="true">
+                <div class="sun"></div>
+                <div class="code-card">
+                    <div class="dots">● ● ●</div>
+                    <code>&lt;hello /&gt;</code>
+                    <div class="code-line"></div>
+                    <div class="code-line short"></div>
+                    <div class="code-line medium"></div>
+                </div>
+                <div class="portrait"><span>RK</span></div>
+                <div class="floating-tag tag-one">Curious mind ✦</div>
+                <div class="floating-tag tag-two">Learning by building</div>
+                <div class="plant">✳</div>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section class="about section" id="about">
+            <div>
+                <p class="eyebrow">A LITTLE ABOUT ME</p>
+                <h2>Learning today.<br><span>Building for tomorrow.</span></h2>
+            </div>
+
+            <div class="about-content">
+                <p>
+                    Hello! I'm Ranjitha K, a student at KGiSL Institute of
+                    Technology in Coimbatore. I enjoy learning programming
+                    languages, creating web interfaces, and exploring how
+                    technology can solve everyday problems.
+                </p>
+                <p>
+                    Through coding practice and personal projects, I'm
+                    developing my skills in programming and web development.
+                    I'm excited to keep learning, collaborate with others,
+                    and grow as a software developer.
+                </p>
+
+                <div class="facts">
+                    <div><strong>01</strong><span>Keep learning</span></div>
+                    <div><strong>02</strong><span>Build projects</span></div>
+                    <div><strong>03</strong><span>Grow together</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section class="projects section" id="projects">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">A FEW THINGS I'VE PRACTICED</p>
+                    <h2>Selected projects<span>.</span></h2>
+                </div>
+
+                <div class="filters" aria-label="Filter projects">
+                    <button type="button" class="filter active" data-filter="all" aria-pressed="true">All</button>
+                    <button type="button" class="filter" data-filter="programming"
+                        aria-pressed="false">Programming</button>
+                    <button type="button" class="filter" data-filter="web" aria-pressed="false">Web</button>
+                </div>
+            </div>
+
+            <div class="project-grid">
+                <article class="project-card" data-category="programming">
+                    <div class="project-image peach">
+                        <span class="big-symbol">C</span>
+                        <div class="mini-window">
+                            <div class="dots">● ● ●</div>
+                            <code>printf("Hello!");</code>
+                        </div>
+                    </div>
+
+                    <div class="project-info">
+                        <p class="project-type">01 / PROGRAMMING</p>
+                        <h3>C Programming</h3>
+                        <p>
+                            A collection of C programming exercises for
+                            practicing language fundamentals and
+                            logical problem-solving.
+                        </p>
+                        <div class="tags">
+                            <span>C</span><span>Programming</span>
+                        </div>
+                        <p class="project-learning">
+                            <strong>What I learned:</strong> Practised C
+                            fundamentals, conditional statements, loops,
+                            and logical problem-solving.
+                        </p>
+                        <a href="https://github.com/ranjithakannan1210/C-programming" target="_blank"
+                            rel="noopener noreferrer">
+                            View repository ↗
+                        </a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="programming">
+                    <div class="project-image blue">
+                        <span class="big-symbol">Java</span>
+                        <div class="mini-window">
+                            <div class="dots">● ● ●</div>
+                            <code>class Main { }</code>
+                        </div>
+                    </div>
+
+                    <div class="project-info">
+                        <p class="project-type">02 / PROGRAMMING</p>
+                        <h3>Java Programming</h3>
+                        <p>
+                            Java practice work exploring programming
+                            concepts and improving coding and
+                            problem-solving skills.
+                        </p>
+                        <div class="tags">
+                            <span>Java</span><span>OOP</span>
+                        </div>
+                        <p class="project-learning">
+                            <strong>What I learned:</strong> Practised Java
+                            syntax, classes, objects, and object-oriented
+                            programming concepts.
+                        </p>
+                        <a href="https://github.com/ranjithakannan1210/java-programming" target="_blank"
+                            rel="noopener noreferrer">
+                            View repository ↗
+                        </a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="web">
+                    <div class="project-image green">
+                        <span class="big-symbol">JS</span>
+                        <div class="mini-window browser-window">
+                            <div class="dots">● ● ●</div>
+                            <div class="mini-blocks">
+                                <span></span><span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-info">
+                        <p class="project-type">03 / WEB DEVELOPMENT</p>
+                        <h3>JavaScript Innovation Lab</h3>
+                        <p>
+                            A repository for practicing JavaScript and
+                            exploring interactive web development ideas.
+                        </p>
+                        <div class="tags">
+                            <span>JavaScript</span><span>HTML</span>
+                        </div>
+                        <p class="project-learning">
+                            <strong>What I learned:</strong> Explored DOM
+                            manipulation, event handling, and building
+                            interactive web-page features.
+                        </p>
+                        <a href="https://github.com/ranjithakannan1210/javascript-innovation-lab" target="_blank"
+                            rel="noopener noreferrer">
+                            View repository ↗
+                        </a>
+                    </div>
+                </article>
+            </div>
+
+            <p class="note">
+                Keep only skills and project descriptions that accurately
+                reflect your work.
+            </p>
+        </section>
+
+        <!-- Skills -->
+        <section class="skills section" id="skills">
+            <p class="eyebrow">TOOLS IN MY TOOLKIT</p>
+            <h2>Skills I'm building<span>.</span></h2>
+
+            <div class="skill-grid">
+                <div class="skill-card">
+                    <h3>Programming</h3>
+                    <div class="tags">
+                        <span>C</span><span>Java</span><span>JavaScript</span>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <h3>Web development</h3>
+                    <div class="tags">
+                        <span>HTML5</span><span>CSS3</span>
+                        <span>Responsive design</span>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <h3>Tools</h3>
+                    <div class="tags">
+                        <span>GitHub</span><span>VS Code</span><span>NetBeans</span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="note">Remove any skill or tool you haven't used yet.</p>
+        </section>
+
+        <!-- Contact -->
+        <section class="contact section" id="contact">
+            <div>
+                <p class="eyebrow">HAVE A PROJECT OR OPPORTUNITY?</p>
+                <h2>Let's make something<br>
+                    <span>meaningful together.</span>
+                </h2>
+                <p>
+                    I'm happy to connect with fellow students, developers,
+                    and people interested in technology.
+                </p>
+            </div>
+
+            <div class="contact-card">
+                <p class="contact-label">EMAIL ME</p>
+                <a class="email" href="mailto:ranjithakannan1210@gmail.com">
+                    ranjithakannan1210@gmail.com ↗
+                </a>
+
+                <div class="contact-socials">
+                    <a href="https://github.com/ranjithakannan1210" target="_blank" rel="noopener noreferrer">GitHub
+                        ↗</a>
+                    <a href="https://www.linkedin.com/in/ranjitha-kannan-6a320038b/" target="_blank"
+                        rel="noopener noreferrer">LinkedIn ↗</a>
+                </div>
+
+                <p class="note">
+                    The email link opens your email app; it doesn't
+                    automatically send a message.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <a href="#home" class="logo"><span>RK</span> Ranjitha K</a>
+        <p>Designed and built with care · © <span id="year"></span> Ranjitha K</p>
+        <a href="#home">Back to top ↑</a>
+    </footer>
+
+</body>
+
+</html>
