@@ -157,7 +157,7 @@
       ["tk-punc", "  "], ["tk-key", "college"], ["tk-punc", ": "], ["tk-str", "\"KG College of Arts and Science\""], ["tk-punc", ",\n"],
       ["tk-punc", "  "], ["tk-key", "city"], ["tk-punc", ": "], ["tk-str", "\"Coimbatore\""], ["tk-punc", ",\n"],
       ["tk-punc", "  "], ["tk-key", "languages"], ["tk-punc", ": ["], ["tk-str", "\"C\""], ["tk-punc", ", "], ["tk-str", "\"Java\""], ["tk-punc", ", "], ["tk-str", "\"JavaScript\""], ["tk-punc", ", "], ["tk-str", "\"Python\""], ["tk-punc", "],\n"],
-      ["tk-punc", "  "], ["tk-key", "Currently pursuing"], ["tk-punc", ": ["], ["tk-str", "\"II year\""], ["tk-punc", ",\n "], ["tk-str", "\"Cloud computing\""], ["tk-punc", "],\n"],
+      ["tk-punc", "  "], ["tk-key", "Currently pursuing"], ["tk-punc", ": ["], ["tk-str", "\"II year\""], ["tk-punc", ",\n "], ["tk-str", "\"Computer Science\""], ["tk-punc", "],\n"],
       ["tk-punc", "  "], ["tk-key", "next"], ["tk-punc", ": "], ["tk-str", "\"build more projects\""], ["tk-punc", ",\n"],
       ["tk-punc", "};"]
     ];
