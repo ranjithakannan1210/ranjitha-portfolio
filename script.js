@@ -1,163 +1,195 @@
-const menuToggle = document.getElementById("menu-toggle");
-const nav = document.getElementById("nav");
-const themeToggle = document.getElementById("theme-toggle");
+// Ranjitha K | Portfolio scripts
+(function () {
+  "use strict";
 
-// Feature 1: Mobile navigation menu
-if (menuToggle && nav) {
-  menuToggle.addEventListener("click", () => {
-    const isOpen = nav.classList.toggle("open");
+  var root = document.documentElement;
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    menuToggle.setAttribute("aria-expanded", String(isOpen));
-    menuToggle.setAttribute(
-      "aria-label",
-      isOpen ? "Close navigation" : "Open navigation"
-    );
-    menuToggle.textContent = isOpen ? "✕" : "☰";
-  });
+  /* ---------- Footer year ---------- */
+  var year = document.getElementById("year");
+  if (year) year.textContent = new Date().getFullYear();
 
-  // Close menu when a navigation link is clicked
-  document.querySelectorAll(".nav-link").forEach((link) => {
-    link.addEventListener("click", () => {
-      nav.classList.remove("open");
+  /* ---------- Theme toggle ---------- */
+  var themeBtn = document.getElementById("theme-toggle");
 
-      menuToggle.setAttribute("aria-expanded", "false");
-      menuToggle.setAttribute("aria-label", "Open navigation");
-      menuToggle.textContent = "☰";
+  function applyTheme(theme) {
+    root.setAttribute("data-theme", theme);
+    if (!themeBtn) return;
+    var isDark = theme === "dark";
+    themeBtn.firstElementChild.textContent = isDark ? "☀" : "☾";
+    themeBtn.setAttribute("aria-label", isDark ? "Switch to light theme" : "Switch to dark theme");
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", isDark ? "#0b0d1f" : "#f5f6ff");
+  }
 
-      document.querySelectorAll(".nav-link").forEach((item) => {
-        item.classList.remove("active");
+  applyTheme(root.getAttribute("data-theme") || "dark");
+
+  if (themeBtn) {
+    themeBtn.addEventListener("click", function () {
+      var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      applyTheme(next);
+      try { localStorage.setItem("theme", next); } catch (e) { /* storage unavailable */ }
+    });
+  }
+
+  /* ---------- Mobile menu ---------- */
+  var menuBtn = document.getElementById("menu-toggle");
+  var nav = document.getElementById("nav");
+
+  function setMenu(open) {
+    nav.classList.toggle("open", open);
+    menuBtn.setAttribute("aria-expanded", String(open));
+    menuBtn.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
+  }
+
+  if (menuBtn && nav) {
+    menuBtn.addEventListener("click", function () {
+      setMenu(!nav.classList.contains("open"));
+    });
+
+    nav.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () { setMenu(false); });
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && nav.classList.contains("open")) {
+        setMenu(false);
+        menuBtn.focus();
+      }
+    });
+  }
+
+  /* ---------- Highlight the nav link for the section in view ---------- */
+  var links = Array.prototype.slice.call(document.querySelectorAll(".nav-link"));
+  var sections = links
+    .map(function (l) { return document.querySelector(l.getAttribute("href")); })
+    .filter(Boolean);
+
+  if ("IntersectionObserver" in window && sections.length) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        links.forEach(function (l) {
+          var active = l.getAttribute("href") === "#" + entry.target.id;
+          l.classList.toggle("active", active);
+          if (active) l.setAttribute("aria-current", "true");
+          else l.removeAttribute("aria-current");
+        });
+      });
+    }, { rootMargin: "-40% 0px -55% 0px" });
+
+    sections.forEach(function (s) { observer.observe(s); });
+  }
+
+  /* ---------- Project filters ---------- */
+  var filterButtons = document.querySelectorAll(".filter");
+  var projects = document.querySelectorAll(".project");
+
+  filterButtons.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var filter = btn.getAttribute("data-filter");
+
+      filterButtons.forEach(function (b) {
+        var on = b === btn;
+        b.classList.toggle("active", on);
+        b.setAttribute("aria-pressed", String(on));
       });
 
-      link.classList.add("active");
+      projects.forEach(function (p) {
+        var show = filter === "all" || p.getAttribute("data-category") === filter;
+        p.hidden = !show;
+      });
     });
   });
-}
 
-// Feature 2: Light and dark theme toggle
-if (themeToggle) {
-  themeToggle.addEventListener("click", () => {
-    const darkMode = document.body.classList.toggle("dark");
-
-    themeToggle.textContent = darkMode ? "☀" : "☾";
-    themeToggle.setAttribute(
-      "aria-label",
-      darkMode ? "Switch to light theme" : "Switch to dark theme"
-    );
+  /* ---------- Profile photo fallback (hero + about) ---------- */
+  document.querySelectorAll(".profile-photo").forEach(function (photo) {
+    var showFallback = function () { photo.parentElement.classList.add("no-photo"); };
+    photo.addEventListener("error", showFallback);
+    if (photo.complete && photo.naturalWidth === 0) showFallback();
   });
-}
 
-// Feature 3: Filter project cards
-const filterButtons = document.querySelectorAll(".filter");
-const projectCards = document.querySelectorAll(".project-card");
-
-filterButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const selectedFilter = button.dataset.filter;
-
-    filterButtons.forEach((item) => {
-      const selected = item === button;
-
-      item.classList.toggle("active", selected);
-      item.setAttribute("aria-pressed", String(selected));
-    });
-
-    projectCards.forEach((card) => {
-      const category = card.dataset.category;
-
-      card.hidden =
-        selectedFilter !== "all" &&
-        category !== selectedFilter;
-    });
-  });
-});
-
-// Feature 4: Open profile photo in a larger view
-const profilePhoto = document.querySelector(".portrait img");
-
-if (profilePhoto) {
-  profilePhoto.style.cursor = "zoom-in";
-  profilePhoto.setAttribute("tabindex", "0");
-  profilePhoto.setAttribute("role", "button");
-  profilePhoto.setAttribute("aria-label", "Open profile photo");
-
-  function openProfilePhoto() {
-    // Prevent opening multiple popups
-    if (document.querySelector(".photo-overlay")) return;
-
-    const overlay = document.createElement("div");
-    overlay.className = "photo-overlay";
-    overlay.setAttribute("role", "dialog");
-    overlay.setAttribute("aria-modal", "true");
-    overlay.setAttribute("aria-label", "Enlarged profile photo");
-
-    const enlargedPhoto = document.createElement("img");
-    enlargedPhoto.src = profilePhoto.src;
-    enlargedPhoto.alt = profilePhoto.alt;
-
-    const closeButton = document.createElement("button");
-    closeButton.className = "photo-close";
-    closeButton.type = "button";
-    closeButton.textContent = "✕";
-    closeButton.setAttribute("aria-label", "Close enlarged photo");
-
-    overlay.append(enlargedPhoto, closeButton);
-    document.body.appendChild(overlay);
-    document.body.style.overflow = "hidden";
-
-    function closePhoto() {
-      overlay.remove();
-      document.body.style.overflow = "";
-      profilePhoto.focus();
-      document.removeEventListener("keydown", handleEscape);
-    }
-
-    function handleEscape(event) {
-      if (event.key === "Escape") {
-        closePhoto();
-      }
-    }
-
-    closeButton.addEventListener("click", closePhoto);
-
-    overlay.addEventListener("click", (event) => {
-      if (event.target === overlay) {
-        closePhoto();
-      }
-    });
-
-    document.addEventListener("keydown", handleEscape);
-    closeButton.focus();
+  /* ---------- Scroll reveal ---------- */
+  if (!reduceMotion && "IntersectionObserver" in window) {
+    root.classList.add("js");
+    var revealEls = document.querySelectorAll(".section");
+    var revealObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add("in");
+          revealObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(function (el) { el.classList.add("reveal"); revealObs.observe(el); });
   }
 
-  profilePhoto.addEventListener("click", openProfilePhoto);
+  /* ---------- Copy email ---------- */
+  var copyBtn = document.getElementById("copy-email");
+  var copyStatus = document.getElementById("copy-status");
 
-  profilePhoto.addEventListener("keydown", (event) => {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      openProfilePhoto();
-    }
-  });
-}
+  if (copyBtn && copyStatus) {
+    copyBtn.addEventListener("click", function () {
+      var email = copyBtn.getAttribute("data-email");
 
-// Feature 5: Automatically update footer year
-const yearElement = document.getElementById("year");
+      function done(ok) {
+        copyStatus.textContent = ok ? "Email copied" : "Copy failed. Select the address and copy it manually.";
+        setTimeout(function () { copyStatus.textContent = ""; }, 2500);
+      }
 
-if (yearElement) {
-  yearElement.textContent = new Date().getFullYear();
-}
-
-// Feature 6: Close mobile menu using Escape
-document.addEventListener("keydown", (event) => {
-  if (
-    event.key === "Escape" &&
-    nav &&
-    menuToggle &&
-    nav.classList.contains("open")
-  ) {
-    nav.classList.remove("open");
-    menuToggle.setAttribute("aria-expanded", "false");
-    menuToggle.setAttribute("aria-label", "Open navigation");
-    menuToggle.textContent = "☰";
-    menuToggle.focus();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(function () { done(true); }, function () { done(false); });
+      } else {
+        done(false);
+      }
+    });
   }
-});
+
+  /* ---------- Hero: code editor types out the profile (runs once) ---------- */
+  var target = document.getElementById("typed");
+  var caret = document.querySelector(".caret");
+
+  if (target) {
+    // [css class, text]
+    var tokens = [
+      ["tk-kw", "const "], ["", "ranjitha "], ["tk-punc", "= {\n"],
+      ["tk-punc", "  "], ["tk-key", "role"], ["tk-punc", ": "], ["tk-str", "\"CS student\""], ["tk-punc", ",\n"],
+      ["tk-punc", "  "], ["tk-key", "college"], ["tk-punc", ": "], ["tk-str", "\"KG College of Arts and Science\""], ["tk-punc", ",\n"],
+      ["tk-punc", "  "], ["tk-key", "city"], ["tk-punc", ": "], ["tk-str", "\"Coimbatore\""], ["tk-punc", ",\n"],
+      ["tk-punc", "  "], ["tk-key", "languages"], ["tk-punc", ": ["], ["tk-str", "\"C\""], ["tk-punc", ", "], ["tk-str", "\"Java\""], ["tk-punc", ", "], ["tk-str", "\"JavaScript\""], ["tk-punc", ", "], ["tk-str", "\"Python\""], ["tk-punc", "],\n"],
+      ["tk-punc", "  "], ["tk-key", "Currently pursuing"], ["tk-punc", ": ["], ["tk-str", "\"II year\""], ["tk-punc", ",\n "], ["tk-str", "\"Cloud computing\""], ["tk-punc", "],\n"],
+      ["tk-punc", "  "], ["tk-key", "next"], ["tk-punc", ": "], ["tk-str", "\"build more projects\""], ["tk-punc", ",\n"],
+      ["tk-punc", "};"]
+    ];
+
+    var build = function (instant) {
+      var spans = tokens.map(function (t) {
+        var s = document.createElement("span");
+        if (t[0]) s.className = t[0];
+        target.appendChild(s);
+        return s;
+      });
+
+      if (instant) {
+        tokens.forEach(function (t, i) { spans[i].textContent = t[1]; });
+        if (caret) caret.classList.add("done");
+        return;
+      }
+
+      var ti = 0, ci = 0;
+      (function tick() {
+        if (ti >= tokens.length) {
+          if (caret) setTimeout(function () { caret.classList.add("done"); }, 1200);
+          return;
+        }
+        var text = tokens[ti][1];
+        ci += 1;
+        spans[ti].textContent = text.slice(0, ci);
+        if (ci >= text.length) { ti += 1; ci = 0; }
+        setTimeout(tick, 22);
+      })();
+    };
+
+    build(reduceMotion);
+  }
+})();
