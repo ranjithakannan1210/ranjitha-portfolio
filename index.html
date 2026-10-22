@@ -5,85 +5,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Ranjitha K, computer science student at KG College of Arts and Science, Coimbatore. Programming, web development, projects and certifications.">
+        content="Ranjitha K - Computer Science student at KG College of Arts and Science, Coimbatore. Explore my skills, projects and certifications.">
     <meta name="theme-color" content="#0b0d1f">
+    <title>Ranjitha K | Portfolio</title>
 
-    <title>Ranjitha K | Computer Science Student</title>
-
-    <!-- Fonts (fallbacks are set in style.css, so the page still works offline) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600;700&display=swap"
         rel="stylesheet">
-
-    <!-- Apply saved theme before the page paints, to avoid a flash -->
-    <script>
-        (function () {
-            try {
-                var saved = localStorage.getItem("theme");
-                document.documentElement.setAttribute("data-theme", saved || "dark");
-            } catch (e) {
-                document.documentElement.setAttribute("data-theme", "light");
-            }
-        })();
-    </script>
 
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
 
 <body>
+    <header class="header" id="top">
+        <nav class="navbar container" aria-label="Main navigation">
+            <a href="#home" class="logo">R<span>.</span>K</a>
 
-    <a class="skip-link" href="#main">Skip to content</a>
-
-    <!-- Header -->
-    <header class="header">
-        <a href="#home" class="logo" aria-label="Ranjitha K, home">
-            <span class="logo-mark">RK</span>
-            <span class="logo-text">Ranjitha K</span>
-        </a>
-
-        <button type="button" class="menu-toggle" id="menu-toggle" aria-label="Open navigation" aria-expanded="false"
-            aria-controls="nav">
-            <span></span><span></span><span></span>
-        </button>
-
-        <nav class="nav" id="nav" aria-label="Main navigation">
-            <a class="nav-link" href="#about">About</a>
-            <a class="nav-link" href="#education">Education</a>
-            <a class="nav-link" href="#certifications">Certifications</a>
-            <a class="nav-link" href="#projects">Projects</a>
-            <a class="nav-link" href="#skills">Skills</a>
-            <a class="nav-link" href="#contact">Contact</a>
-
-            <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Switch to dark theme"
-                title="Switch between light and dark theme">
-                <span aria-hidden="true">☾</span>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation menu" aria-expanded="false"
+                aria-controls="nav-links">
+                ☰
             </button>
+
+            <div class="nav-links" id="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#education">Education</a>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+                <a href="#contact">Contact</a>
+                <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch color theme">☀</button>
+            </div>
         </nav>
     </header>
 
-    <main id="main">
-
+    <main>
         <!-- Hero -->
-        <section class="hero" id="home">
-            <div class="hero-copy">
-                <p class="hero-role">Computer science student, Coimbatore</p>
-
-                <h1>Hi, I'm <span class="grad">Ranjitha</span>. I write code, break it, and learn how to fix it.</h1>
-
-                <p class="hero-intro">
-                    I study at KG College of Arts and Science and practise C, Java, JavaScript and Python.
-                    This site collects what I've built and the courses I've completed so far.
+        <section class="hero section container" id="home">
+            <div class="hero-content">
+                <p class="eyebrow"><span class="status-dot"></span> COMPUTER SCIENCE STUDENT</p>
+                <h1>Hi, I'm <span>Ranjitha K.</span></h1>
+                <h2 class="hero-subtitle">Aspiring <span id="typing-text">Web Developer</span><span
+                        class="cursor">|</span></h2>
+                <p class="hero-description">
+                    I enjoy learning new technologies, building creative websites,
+                    and turning ideas into useful digital experiences.
                 </p>
 
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn primary">See my projects</a>
-                    <a href="#contact" class="btn secondary">Get in touch</a>
+                <div class="hero-actions">
+                    <a href="#projects" class="btn primary">Explore My Work ↗</a>
+                    <a href="#contact" class="btn secondary">Contact Me</a>
                 </div>
 
-                <div class="social-links">
+                <div class="hero-socials">
                     <a href="https://github.com/ranjithakannan1210" target="_blank" rel="noopener noreferrer">GitHub
                         ↗</a>
                     <a href="https://www.linkedin.com/in/ranjitha-kannan-6a320038b/" target="_blank"
@@ -91,176 +67,298 @@
                 </div>
             </div>
 
-            <!-- Photo + code editor that types out the profile -->
             <div class="hero-visual">
-                <div class="avatar">
-                    <img src="images/profile.png" alt="Portrait of Ranjitha K" class="profile-photo" width="120"
-                        height="120">
-                    <span class="photo-fallback" aria-hidden="true">RK</span>
-                </div>
-
-                <div class="editor" aria-label="Code editor showing a summary of Ranjitha's profile">
-                    <div class="editor-bar">
-                        <span class="editor-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-                        <span class="editor-file">ranjitha.js</span>
+                <div class="photo-glow"></div>
+                <div class="photo-card">
+                    <img class="profile-photo" src="images/profile.png" alt="Portrait of Ranjitha K"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';">
+                    <div class="photo-placeholder" aria-hidden="true">RK</div>
+                    <div class="photo-caption">
+                        <span class="status-dot"></span>
+                        <div>
+                            <strong>Ranjitha K</strong>
+                            <small>Learning. Building. Growing.</small>
+                        </div>
                     </div>
-                    <pre
-                        class="editor-body"><code id="typed" aria-hidden="true"></code><span class="caret" aria-hidden="true"></span></pre>
-                    <p class="sr-only">
-                        Ranjitha is a computer science student at KG College of Arts and Science in Coimbatore. She
-                        works
-                        in C, Java, JavaScript and Python, and is learning data structures and cloud computing.
-                    </p>
                 </div>
+                <div class="floating-tag tag-top">{"<code />"}</div>
+                <div class="floating-tag tag-bottom">Creative mind ✦</div>
             </div>
         </section>
 
         <!-- About -->
-        <section class="section about" id="about">
-            <div class="about-photo">
-                <img src="images/profile.png" alt="Portrait of Ranjitha K" class="profile-photo" width="320"
-                    height="400">
-                <span class="photo-fallback" aria-hidden="true">RK</span>
+        <section class="section container" id="about">
+            <div class="section-heading">
+                <p class="eyebrow">GET TO KNOW ME</p>
+                <h2>About <span>Me</span></h2>
             </div>
 
-            <div class="about-text">
-                <h2>About me</h2>
+            <div class="about-grid">
+                <article class="about-card">
+                    <span class="card-icon">✦</span>
+                    <h3>Who I Am</h3>
+                    <p>
+                        I'm a Computer Science student at KG College of Arts and
+                        Science, Coimbatore. I'm interested in programming,
+                        web development, and exploring new technologies.
+                    </p>
+                </article>
 
-                <p>
-                    I'm Ranjitha K, a computer science student at KG College of Arts and Science in Coimbatore.
-                    I like turning an idea into something that runs, whether that's a small C program or a
-                    web page that reacts when you click it.
-                </p>
+                <article class="about-card">
+                    <span class="card-icon">⌘</span>
+                    <h3>What I Do</h3>
+                    <p>
+                        I practise coding, develop academic projects, and build
+                        responsive web interfaces using HTML, CSS, and JavaScript.
+                    </p>
+                </article>
 
-                <p>
-                    Most of my learning happens by building. I practise on GitHub, take structured courses to fill
-                    the gaps, and I'm working towards becoming a confident software developer.
-                </p>
-
-                <dl class="facts">
-                    <div>
-                        <dt>Studying</dt>
-                        <dd>Computer science</dd>
-                    </div>
-                    <div>
-                        <dt>College</dt>
-                        <dd>KG College of Arts and Science</dd>
-                    </div>
-                    <div>
-                        <dt>Currently pursuing my</dt>
-                        <dd>II Year</dd>
-                    </div>
-                </dl>
+                <article class="about-card">
+                    <span class="card-icon">↗</span>
+                    <h3>My Goal</h3>
+                    <p>
+                        My goal is to strengthen my technical skills, gain
+                        practical experience, and grow into a confident developer.
+                    </p>
+                </article>
             </div>
         </section>
 
         <!-- Education -->
-        <section class="section education" id="education">
-            <div class="section-head">
-                <h2>Education</h2>
-                <p>Where I've studied, newest first.</p>
+        <section class="section container" id="education">
+            <div class="section-heading">
+                <p class="eyebrow">MY LEARNING JOURNEY</p>
+                <h2>Education & <span>Learning</span></h2>
             </div>
 
-            <ol class="timeline">
-                <li>
-                    <div class="timeline-meta">Now</div>
-                    <div class="timeline-body">
-                        <h3>KG College of Arts and Science</h3>
-                        <p>Computer science student, Coimbatore.</p>
+            <div class="timeline">
+                <article class="timeline-item">
+                    <span class="timeline-dot"></span>
+                    <div class="timeline-card">
+                        <p class="timeline-date">CURRENT</p>
+                        <h3>Computer Science</h3>
+                        <p class="timeline-place">KG College of Arts and Science</p>
+                        <p>Coimbatore, Tamil Nadu</p>
+                        <p>Learning computer science fundamentals, programming,
+                            algorithms, and web development.</p>
                     </div>
-                </li>
+                </article>
 
-                <li>
-                    <div class="timeline-meta">12th grade</div>
-                    <div class="timeline-body">
-                        <h3>Sri Krishna Matric Higher Secondary School</h3>
-                        <p>Higher secondary education.</p>
-                        <span class="score">91%</span>
+                <article class="timeline-item">
+                    <span class="timeline-dot"></span>
+                    <div class="timeline-card">
+                        <p class="timeline-date">CONTINUOUS LEARNING</p>
+                        <h3>Technical Courses & Practice</h3>
+                        <p class="timeline-place">Online learning platforms</p>
+                        <p>Building knowledge through coding exercises,
+                            coursework, and hands-on projects.</p>
                     </div>
-                </li>
-
-                <li>
-                    <div class="timeline-meta">10th grade</div>
-                    <div class="timeline-body">
-                        <h3>Sri Krishna Matric Higher Secondary School</h3>
-                        <p>Secondary school education.</p>
-                        <span class="score">89%</span>
-                    </div>
-                </li>
-            </ol>
+                </article>
+            </div>
         </section>
 
         <!-- Certifications -->
-        <section class="section certifications" id="certifications">
-            <div class="section-head">
-                <h2>Certifications</h2>
-                <p>Courses I've completed, grouped by who issued them.</p>
+        <section class="section container" id="certifications">
+            <div class="section-heading">
+                <p class="eyebrow">SKILLS IN PROGRESS</p>
+                <h2>Courses & <span>Certifications</span></h2>
+                <p class="section-description">
+                    Courses and learning experiences that support my development.
+                </p>
             </div>
 
-            <div class="cert-list">
-
-                <article class="cert-group">
-                    <h3>NPTEL</h3>
-                    <ul>
-                        <li>
-                            <strong>Cloud Computing and Distributed Systems</strong>
-                            <span>Completed through NPTEL.</span>
-                        </li>
-                    </ul>
+            <div class="cert-grid">
+                <article class="cert-card">
+                    <span class="cert-icon">🌐</span>
+                    <div>
+                        <h3>Web Development</h3>
+                        <p>HTML, CSS, JavaScript and responsive design.</p>
+                        <span class="tag">Web Technologies</span>
+                    </div>
                 </article>
 
-                <article class="cert-group">
-                    <h3>KGiSL Educational Institutions</h3>
-                    <ul>
-                        <li>
-                            <strong>Advanced Java Development</strong>
-                            <span>Completed October 2025.</span>
-                        </li>
-                        <li>
-                            <strong>C Programming with DSA Foundation</strong>
-                            <span>Completed October 2025.</span>
-                        </li>
-                    </ul>
+                <article class="cert-card">
+                    <span class="cert-icon">☁</span>
+                    <div>
+                        <h3>Cloud Computing</h3>
+                        <p>Learning cloud services, deployment, and Azure fundamentals.</p>
+                        <span class="tag">Cloud</span>
+                    </div>
                 </article>
 
-                <article class="cert-group">
-                    <h3>Coursera</h3>
-                    <ul>
-                        <li>
-                            <strong>Programming in Python</strong>
-                            <span>Course completion certificate.</span>
-                        </li>
-                    </ul>
+                <article class="cert-card">
+                    <span class="cert-icon">⌘</span>
+                    <div>
+                        <h3>Programming</h3>
+                        <p>Practising programming concepts and problem-solving.</p>
+                        <span class="tag">Computer Science</span>
+                    </div>
                 </article>
-
             </div>
+            <p class="note">Replace these course descriptions with your actual certificate names and links.</p>
         </section>
 
         <!-- Projects -->
-        <section class="section projects" id="projects">
-            <div class="section-head split">
-                <div>
-                    <h2>Projects</h2>
-                    <p>Practice repositories where I try ideas and learn the fundamentals.</p>
-                </div>
-
-                <div class="filters" role="group" aria-label="Filter projects">
-                    <button type="button" class="filter active" data-filter="all" aria-pressed="true">All</button>
-                    <button type="button" class="filter" data-filter="programming"
-                        aria-pressed="false">Programming</button>
-                    <button type="button" class="filter" data-filter="web" aria-pressed="false">Web</button>
-                </div>
+        <section class="section container" id="projects">
+            <div class="section-heading">
+                <p class="eyebrow">WHAT I'VE BEEN BUILDING</p>
+                <h2>Featured <span>Projects</span></h2>
+                <p class="section-description">
+                    A selection of academic and personal projects.
+                </p>
             </div>
 
-            <div class="project-list">
+            <div class="project-filters" role="group" aria-label="Filter projects">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="web">Web Development</button>
+                <button class="filter-btn" data-filter="java">Java</button>
+            </div>
 
-                <article class="project" data-category="programming">
-                    <div class="project-lang" aria-hidden="true">C</div>
-                    <div class="project-info">
-                        <h3>C Programming</h3>
-                        <p>
-                            A collection of C exercises for practising language fundamentals and logical
-                            problem-solving.
-                        </p>
-                        <p class="project-learning">
-                            <strong>What I learned:</strong> conditional statements, loops,
+            <div class="project-grid">
+                <article class="project-card" data-category="web">
+                    <div class="project-art art-one">
+                        <span>01</span><span class="art-symbol">✳</span>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-type">WEB DEVELOPMENT</p>
+                        <h3>Personal Portfolio Website</h3>
+                        <p>A responsive website presenting my background, skills,
+                            projects, and contact information.</p>
+                        <div class="tags">
+                            <span>HTML</span><span>CSS</span><span>JavaScript</span>
+                        </div>
+                        <a class="project-link" href="https://github.com/ranjithakannan1210" target="_blank"
+                            rel="noopener noreferrer">View on GitHub ↗</a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="java">
+                    <div class="project-art art-two">
+                        <span>02</span><span class="art-symbol">⌘</span>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-type">JAVA APPLICATION</p>
+                        <h3>Training Registration System</h3>
+                        <p>A Java Swing application concept for registering
+                            participants and tracking training programmes.</p>
+                        <div class="tags">
+                            <span>Java</span><span>Swing</span><span>OOP</span>
+                        </div>
+                        <a class="project-link" href="https://github.com/ranjithakannan1210" target="_blank"
+                            rel="noopener noreferrer">View on GitHub ↗</a>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="web">
+                    <div class="project-art art-three">
+                        <span>03</span><span class="art-symbol">♡</span>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-type">FRONT-END UI</p>
+                        <h3>Food Delivery Website</h3>
+                        <p>A modern food ordering interface with home, search,
+                            food details, cart, and checkout screens.</p>
+                        <div class="tags">
+                            <span>HTML</span><span>CSS</span><span>JavaScript</span>
+                        </div>
+                        <a class="project-link" href="https://github.com/ranjithakannan1210" target="_blank"
+                            rel="noopener noreferrer">View on GitHub ↗</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section class="section container" id="skills">
+            <div class="section-heading">
+                <p class="eyebrow">MY TOOLKIT</p>
+                <h2>Skills & <span>Technologies</span></h2>
+            </div>
+
+            <div class="skills-layout">
+                <div class="skills-card">
+                    <h3>Technical Skills</h3>
+                    <div class="skill-list">
+                        <div class="skill-item">
+                            <div><span>HTML</span><span>Learning</span></div>
+                            <div class="skill-track"><span style="width:80%"></span></div>
+                        </div>
+                        <div class="skill-item">
+                            <div><span>CSS</span><span>Learning</span></div>
+                            <div class="skill-track"><span style="width:75%"></span></div>
+                        </div>
+                        <div class="skill-item">
+                            <div><span>JavaScript</span><span>Learning</span></div>
+                            <div class="skill-track"><span style="width:55%"></span></div>
+                        </div>
+                        <div class="skill-item">
+                            <div><span>Java</span><span>Learning</span></div>
+                            <div class="skill-track"><span style="width:60%"></span></div>
+                        </div>
+                    </div>
+                    <p class="note">Progress bars are illustrative. Adjust them to reflect your actual proficiency.</p>
+                </div>
+
+                <div class="tools-card">
+                    <h3>Tools I Explore</h3>
+                    <div class="tool-chips">
+                        <span>VS Code</span>
+                        <span>NetBeans</span>
+                        <span>GitHub</span>
+                        <span>MATLAB</span>
+                        <span>Azure</span>
+                        <span>Chrome DevTools</span>
+                    </div>
+                    <div class="learning-box">
+                        <span class="learning-icon">✦</span>
+                        <div>
+                            <h4>Always learning</h4>
+                            <p>Exploring new tools and improving my development skills one project at a time.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section class="section container contact" id="contact">
+            <div class="contact-text">
+                <p class="eyebrow">LET'S CONNECT</p>
+                <h2>Let's <span>talk.</span></h2>
+                <p>
+                    I'm happy to hear from fellow students, developers, and anyone
+                    interested in technology. Email is the quickest way to reach me.
+                </p>
+            </div>
+
+            <div class="contact-card">
+                <p class="contact-label">EMAIL</p>
+                <a class="email" href="mailto:ranjithakannan1210@gmail.com">
+                    ranjithakannan1210@gmail.com
+                </a>
+                <div class="contact-actions">
+                    <button type="button" class="btn secondary" id="copy-email"
+                        data-email="ranjithakannan1210@gmail.com">Copy email</button>
+                    <span class="copy-status" id="copy-status" role="status" aria-live="polite"></span>
+                </div>
+                <div class="contact-socials">
+                    <a href="https://github.com/ranjithakannan1210" target="_blank" rel="noopener noreferrer">GitHub
+                        ↗</a>
+                    <a href="https://www.linkedin.com/in/ranjitha-kannan-6a320038b/" target="_blank"
+                        rel="noopener noreferrer">LinkedIn ↗</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <a href="#home" class="logo">R<span>.</span>K</a>
+            <p>Designed and built by Ranjitha K.</p>
+            <p>© <span id="year"></span> All rights reserved.</p>
+            <a href="#top" class="back-top">Back to top ↑</a>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -1,195 +1,188 @@
-// Ranjitha K | Portfolio scripts
-(function () {
-  "use strict";
 
-  var root = document.documentElement;
-  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+document.addEventListener("DOMContentLoaded", () => {
+  // Footer year
+  const yearElement = document.getElementById("year");
 
-  /* ---------- Footer year ---------- */
-  var year = document.getElementById("year");
-  if (year) year.textContent = new Date().getFullYear();
-
-  /* ---------- Theme toggle ---------- */
-  var themeBtn = document.getElementById("theme-toggle");
-
-  function applyTheme(theme) {
-    root.setAttribute("data-theme", theme);
-    if (!themeBtn) return;
-    var isDark = theme === "dark";
-    themeBtn.firstElementChild.textContent = isDark ? "☀" : "☾";
-    themeBtn.setAttribute("aria-label", isDark ? "Switch to light theme" : "Switch to dark theme");
-    var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute("content", isDark ? "#0b0d1f" : "#f5f6ff");
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
   }
 
-  applyTheme(root.getAttribute("data-theme") || "dark");
+  // Mobile navigation
+  const menuToggle = document.getElementById("menu-toggle");
+  const navLinks = document.getElementById("nav-links");
 
-  if (themeBtn) {
-    themeBtn.addEventListener("click", function () {
-      var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      applyTheme(next);
-      try { localStorage.setItem("theme", next); } catch (e) { /* storage unavailable */ }
-    });
-  }
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
 
-  /* ---------- Mobile menu ---------- */
-  var menuBtn = document.getElementById("menu-toggle");
-  var nav = document.getElementById("nav");
-
-  function setMenu(open) {
-    nav.classList.toggle("open", open);
-    menuBtn.setAttribute("aria-expanded", String(open));
-    menuBtn.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
-  }
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", function () {
-      setMenu(!nav.classList.contains("open"));
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.setAttribute(
+        "aria-label",
+        isOpen ? "Close navigation menu" : "Open navigation menu"
+      );
+      menuToggle.textContent = isOpen ? "✕" : "☰";
     });
 
-    nav.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", function () { setMenu(false); });
-    });
-
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && nav.classList.contains("open")) {
-        setMenu(false);
-        menuBtn.focus();
-      }
-    });
-  }
-
-  /* ---------- Highlight the nav link for the section in view ---------- */
-  var links = Array.prototype.slice.call(document.querySelectorAll(".nav-link"));
-  var sections = links
-    .map(function (l) { return document.querySelector(l.getAttribute("href")); })
-    .filter(Boolean);
-
-  if ("IntersectionObserver" in window && sections.length) {
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        links.forEach(function (l) {
-          var active = l.getAttribute("href") === "#" + entry.target.id;
-          l.classList.toggle("active", active);
-          if (active) l.setAttribute("aria-current", "true");
-          else l.removeAttribute("aria-current");
-        });
-      });
-    }, { rootMargin: "-40% 0px -55% 0px" });
-
-    sections.forEach(function (s) { observer.observe(s); });
-  }
-
-  /* ---------- Project filters ---------- */
-  var filterButtons = document.querySelectorAll(".filter");
-  var projects = document.querySelectorAll(".project");
-
-  filterButtons.forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      var filter = btn.getAttribute("data-filter");
-
-      filterButtons.forEach(function (b) {
-        var on = b === btn;
-        b.classList.toggle("active", on);
-        b.setAttribute("aria-pressed", String(on));
-      });
-
-      projects.forEach(function (p) {
-        var show = filter === "all" || p.getAttribute("data-category") === filter;
-        p.hidden = !show;
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open navigation menu");
+        menuToggle.textContent = "☰";
       });
     });
-  });
-
-  /* ---------- Profile photo fallback (hero + about) ---------- */
-  document.querySelectorAll(".profile-photo").forEach(function (photo) {
-    var showFallback = function () { photo.parentElement.classList.add("no-photo"); };
-    photo.addEventListener("error", showFallback);
-    if (photo.complete && photo.naturalWidth === 0) showFallback();
-  });
-
-  /* ---------- Scroll reveal ---------- */
-  if (!reduceMotion && "IntersectionObserver" in window) {
-    root.classList.add("js");
-    var revealEls = document.querySelectorAll(".section");
-    var revealObs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) {
-          e.target.classList.add("in");
-          revealObs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    revealEls.forEach(function (el) { el.classList.add("reveal"); revealObs.observe(el); });
   }
 
-  /* ---------- Copy email ---------- */
-  var copyBtn = document.getElementById("copy-email");
-  var copyStatus = document.getElementById("copy-status");
+  // Light/dark theme toggle
+  const themeToggle = document.getElementById("theme-toggle");
 
-  if (copyBtn && copyStatus) {
-    copyBtn.addEventListener("click", function () {
-      var email = copyBtn.getAttribute("data-email");
+  if (themeToggle) {
+    const savedTheme = localStorage.getItem("portfolio-theme");
 
-      function done(ok) {
-        copyStatus.textContent = ok ? "Email copied" : "Copy failed. Select the address and copy it manually.";
-        setTimeout(function () { copyStatus.textContent = ""; }, 2500);
+    if (savedTheme === "light") {
+      document.body.classList.add("light-theme");
+    }
+
+    updateThemeButton();
+
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light-theme");
+
+      const theme = document.body.classList.contains("light-theme")
+        ? "light"
+        : "dark";
+
+      try {
+        localStorage.setItem("portfolio-theme", theme);
+      } catch (error) {
+        // Theme still works if browser storage is unavailable.
       }
 
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(email).then(function () { done(true); }, function () { done(false); });
-      } else {
-        done(false);
-      }
+      updateThemeButton();
     });
   }
 
-  /* ---------- Hero: code editor types out the profile (runs once) ---------- */
-  var target = document.getElementById("typed");
-  var caret = document.querySelector(".caret");
+  function updateThemeButton() {
+    if (!themeToggle) return;
 
-  if (target) {
-    // [css class, text]
-    var tokens = [
-      ["tk-kw", "const "], ["", "ranjitha "], ["tk-punc", "= {\n"],
-      ["tk-punc", "  "], ["tk-key", "role"], ["tk-punc", ": "], ["tk-str", "\"CS student\""], ["tk-punc", ",\n"],
-      ["tk-punc", "  "], ["tk-key", "college"], ["tk-punc", ": "], ["tk-str", "\"KG College of Arts and Science\""], ["tk-punc", ",\n"],
-      ["tk-punc", "  "], ["tk-key", "city"], ["tk-punc", ": "], ["tk-str", "\"Coimbatore\""], ["tk-punc", ",\n"],
-      ["tk-punc", "  "], ["tk-key", "languages"], ["tk-punc", ": ["], ["tk-str", "\"C\""], ["tk-punc", ", "], ["tk-str", "\"Java\""], ["tk-punc", ", "], ["tk-str", "\"JavaScript\""], ["tk-punc", ", "], ["tk-str", "\"Python\""], ["tk-punc", "],\n"],
-      ["tk-punc", "  "], ["tk-key", "Currently pursuing"], ["tk-punc", ": ["], ["tk-str", "\"II year\""], ["tk-punc", ",\n "], ["tk-str", "\"Computer Science\""], ["tk-punc", "],\n"],
-      ["tk-punc", "  "], ["tk-key", "next"], ["tk-punc", ": "], ["tk-str", "\"build more projects\""], ["tk-punc", ",\n"],
-      ["tk-punc", "};"]
+    const isLight = document.body.classList.contains("light-theme");
+    themeToggle.textContent = isLight ? "☾" : "☀";
+    themeToggle.setAttribute(
+      "aria-label",
+      isLight ? "Switch to dark theme" : "Switch to light theme"
+    );
+  }
+
+  // Typing animation
+  const typingText = document.getElementById("typing-text");
+
+  if (typingText) {
+    const words = [
+      "Web Developer",
+      "Computer Science Student",
+      "Creative Problem Solver"
     ];
 
-    var build = function (instant) {
-      var spans = tokens.map(function (t) {
-        var s = document.createElement("span");
-        if (t[0]) s.className = t[0];
-        target.appendChild(s);
-        return s;
-      });
+    let wordIndex = 0;
+    let characterIndex = words[0].length;
+    let deleting = true;
 
-      if (instant) {
-        tokens.forEach(function (t, i) { spans[i].textContent = t[1]; });
-        if (caret) caret.classList.add("done");
-        return;
+    function typeWords() {
+      const currentWord = words[wordIndex];
+
+      if (deleting) {
+        characterIndex--;
+      } else {
+        characterIndex++;
       }
 
-      var ti = 0, ci = 0;
-      (function tick() {
-        if (ti >= tokens.length) {
-          if (caret) setTimeout(function () { caret.classList.add("done"); }, 1200);
-          return;
-        }
-        var text = tokens[ti][1];
-        ci += 1;
-        spans[ti].textContent = text.slice(0, ci);
-        if (ci >= text.length) { ti += 1; ci = 0; }
-        setTimeout(tick, 22);
-      })();
-    };
+      typingText.textContent = currentWord.substring(
+        0,
+        Math.max(0, characterIndex)
+      );
 
-    build(reduceMotion);
+      let delay = deleting ? 45 : 85;
+
+      if (characterIndex <= 0) {
+        deleting = false;
+        wordIndex = (wordIndex + 1) % words.length;
+        delay = 400;
+      } else if (characterIndex >= words[wordIndex].length && !deleting) {
+        deleting = true;
+        delay = 1400;
+      }
+
+      window.setTimeout(typeWords, delay);
+    }
+
+    window.setTimeout(typeWords, 1500);
   }
-})();
+
+  // Project filters
+  const filterButtons = document.querySelectorAll(".filter-btn");
+  const projectCards = document.querySelectorAll(".project-card");
+
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const filter = button.dataset.filter;
+
+      filterButtons.forEach((item) => {
+        item.classList.remove("active");
+      });
+
+      button.classList.add("active");
+
+      projectCards.forEach((card) => {
+        const matches =
+          filter === "all" || card.dataset.category === filter;
+
+        card.hidden = !matches;
+      });
+    });
+  });
+
+  // Copy email address
+  const copyEmailButton = document.getElementById("copy-email");
+  const copyStatus = document.getElementById("copy-status");
+
+  if (copyEmailButton && copyStatus) {
+    copyEmailButton.addEventListener("click", async () => {
+      const email = copyEmailButton.dataset.email;
+
+      try {
+        await navigator.clipboard.writeText(email);
+        copyStatus.textContent = "Email copied!";
+      } catch (error) {
+        copyStatus.textContent =
+          "Copy unavailable. Please copy the email manually.";
+      }
+    });
+  }
+
+  // Highlight navigation link for the current section
+  const sections = document.querySelectorAll("main section[id]");
+  const navigationLinks = document.querySelectorAll(
+    '.nav-links a[href^="#"]'
+  );
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            navigationLinks.forEach((link) => {
+              link.classList.toggle(
+                "active",
+                link.getAttribute("href") ===
+                `#${entry.target.id}`
+              );
+            });
+          }
+        });
+      },
+      { rootMargin: "-30% 0px -60% 0px" }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+  }
+});
